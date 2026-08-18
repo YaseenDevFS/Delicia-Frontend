@@ -74,7 +74,7 @@ function Menu() {
                 setLoading(true)
 
                 const response = await axios.get(
-                    'http://localhost:4000/api/menu'
+                    'https://delicia-backend.vercel.app/api/menu'
                 )
 
                 console.log('Menu data:', response.data)
@@ -140,7 +140,7 @@ function Menu() {
             setAddingItem(menuItemId)
 
             const response = await axios.post(
-                'http://localhost:4000/api/cart',
+                'https://delicia-backend.vercel.app/api/cart',
                 {
                     menu_item_id: menuItemId,
                     quantity: 1,

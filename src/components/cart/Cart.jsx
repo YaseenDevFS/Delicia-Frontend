@@ -42,7 +42,7 @@ function Cart() {
             }
 
             const response = await axios.get(
-                'http://localhost:4000/api/cart',
+                'https://delicia-backend.vercel.app/api/cart',
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ function Cart() {
             }
 
             await axios.patch(
-                `http://localhost:4000/api/cart/${id}`,
+                `https://delicia-backend.vercel.app/api/cart/${id}`,
                 {
                     quantity: newQuantity,
                 },
@@ -122,7 +122,7 @@ function Cart() {
             const token = localStorage.getItem('token')
 
             await axios.delete(
-                `http://localhost:4000/api/cart/${id}`,
+                `https://delicia-backend.vercel.app/api/cart/${id}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -149,7 +149,7 @@ function Cart() {
             const token = localStorage.getItem('token')
 
             await axios.delete(
-                'http://localhost:4000/api/cart',
+                'https://delicia-backend.vercel.app/api/cart',
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

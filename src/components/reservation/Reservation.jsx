@@ -36,7 +36,7 @@ function Reservation() {
                 }
 
                 const response = await axios.get(
-                    "http://localhost:4000/api/reservations/my",
+                    "https://delicia-backend.vercel.app/api/reservations/my",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,

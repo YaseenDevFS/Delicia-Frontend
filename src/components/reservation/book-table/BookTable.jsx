@@ -61,7 +61,7 @@ function BookTable() {
             }
 
             const response = await axios.post(
-                'http://localhost:4000/api/reservations',
+                'https://delicia-backend.vercel.app/api/reservations',
                 reservationData,
                 {
                     headers: {
