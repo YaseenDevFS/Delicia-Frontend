@@ -31,7 +31,10 @@ function Reservation() {
                 const token = localStorage.getItem("token")
 
                 if (!token) {
-                    setError("You need to login first.")
+                    setError({
+                        message: "You need to login first.",
+                        showLogin: true
+                    })
                     return
                 }
 
@@ -67,10 +70,11 @@ function Reservation() {
             } catch (error) {
                 console.error("Failed to get reservations:", error)
 
-                setError(
-                    error.response?.data?.message ||
-                    "Failed to load reservations."
-                )
+                setError({
+                    message: error.response?.data?.message ||
+                        "Failed to load reservations.",
+                    showLogin: false
+                })
             } finally {
                 setLoading(false)
             }
@@ -208,7 +212,7 @@ function Reservation() {
                     </div>
                 )}
 
-                {/* Error */}
+                {/* ✅ Error with Login Link */}
                 {!loading && error && (
                     <motion.div
                         className="mt-3 sm:mt-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4 sm:p-5"
@@ -216,7 +220,16 @@ function Reservation() {
                         animate={{ opacity: 1, y: 0 }}
                     >
                         <p className="text-sm font-medium text-red-400">
-                            {error}
+                            {typeof error === 'object' ? error.message : error}
+                            
+                            {typeof error === 'object' && error.showLogin && (
+                                <Link 
+                                    href="/login" 
+                                    className="ml-2 text-[#d89b2b] hover:underline hover:text-[#e0a12f] transition font-semibold"
+                                >
+                                    Login here →
+                                </Link>
+                            )}
                         </p>
                     </motion.div>
                 )}
