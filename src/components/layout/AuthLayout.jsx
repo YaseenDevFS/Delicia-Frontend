@@ -1,3 +1,4 @@
+// src/components/layout/AuthLayout.jsx
 import Image from 'next/image'
 import { Sandwich, UtensilsCrossed } from 'lucide-react'
 
@@ -17,7 +18,13 @@ export default function AuthLayout({ children }) {
           <div className="absolute inset-0 bg-black/70" />
 
           <div className="relative max-w-md">
-            <Image src={'/logo.png'} className="absolute -left-8 sm:-left-10 -top-32 sm:-top-40" width={120} sm:width={150} height={120} sm:height={150} alt="Delicia logo" />
+            <Image 
+              src={'/logo.png'} 
+              className="absolute -left-8 sm:-left-10 -top-32 sm:-top-40" 
+              width={150} 
+              height={150} 
+              alt="Delicia logo" 
+            />
             <div className="flex flex-col items-center">
               <h1 className="mb-3 sm:mb-4 text-3xl sm:text-4xl lg:text-5xl font-semibold">
                 Welcome to <span className="text-[#d89b2b]">Delicia</span>
@@ -28,7 +35,7 @@ export default function AuthLayout({ children }) {
 
               <div className="mt-6 sm:mt-8 flex w-full items-center gap-3 sm:gap-4">
                 <span className="h-0.5 flex-1 bg-linear-to-l from-[#d89b2b] to-transparent" />
-                <UtensilsCrossed size={20} sm:size={24} className="shrink-0 text-[#d89b2b]" />
+                <UtensilsCrossed size={24} className="shrink-0 text-[#d89b2b]" />
                 <span className="h-0.5 flex-1 bg-linear-to-r from-[#d89b2b] to-transparent" />
               </div>
 
@@ -36,7 +43,7 @@ export default function AuthLayout({ children }) {
                 {Array.from({ length: 4 }).map((_, index) => (
                   <div key={index} className="flex flex-col items-center">
                     <div className="rounded-xl border border-white/10 bg-white/5 p-3 sm:p-4 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                      <Sandwich className="text-[#d89b2b]" size={24} sm:size={30} />
+                      <Sandwich className="text-[#d89b2b]" size={30} />
                     </div>
                     <h2 className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-orange-100">Delicious Food</h2>
                   </div>
