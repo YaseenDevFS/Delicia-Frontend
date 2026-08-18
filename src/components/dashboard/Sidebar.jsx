@@ -6,6 +6,7 @@ import {
   CalendarDays,
   FileText,
   LogOut,
+  LogIn,
   Contact,
 } from "lucide-react";
 
@@ -29,6 +30,24 @@ function Sidebar() {
   ];
 
   const [activePage, setActivePage] = useState("Home");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // ✅ التحقق من حالة تسجيل الدخول
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    checkAuth();
+
+    // الاستماع للتغييرات في localStorage
+    window.addEventListener('storage', checkAuth);
+
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, []);
 
   useEffect(() => {
     const currentItem = menuItems.find(
@@ -45,8 +64,25 @@ function Sidebar() {
     router.push(link);
   };
 
+  // ✅ دالة تسجيل الخروج
   const logout = () => {
-    router.push("/login");
+    // حذف التوكن من localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    
+    // حذف التوكن من cookies
+    document.cookie = 'token=; path=/; max-age=0';
+    
+    // تحديث حالة تسجيل الدخول
+    setIsLoggedIn(false);
+    
+    // التوجيه إلى صفحة تسجيل الدخول
+    router.push('/login');
+  };
+
+  // ✅ دالة تسجيل الدخول (توجيه إلى صفحة login)
+  const goToLogin = () => {
+    router.push('/login');
   };
 
   return (
@@ -215,11 +251,11 @@ function Sidebar() {
 
         </div>
 
-        {/* Logout */}
+        {/* ✅ Logout / Sign In Button */}
 
         <button
-          onClick={logout}
-          className="
+          onClick={isLoggedIn ? logout : goToLogin}
+          className={`
             mt-4
             flex
             w-full
@@ -227,18 +263,27 @@ function Sidebar() {
             gap-3
             rounded-lg
             p-3
-            text-red-400
             transition-colors
             hover:bg-[#2A2A2A]
-            hover:text-red-300
-          "
+
+            ${isLoggedIn 
+              ? 'text-red-400 hover:text-red-300' 
+              : 'text-[#d89b2b] hover:text-[#e0a12f]'
+            }
+          `}
         >
 
-          <LogOut size={20} />
-
-          <span>
-            Logout
-          </span>
+          {isLoggedIn ? (
+            <>
+              <LogOut size={20} />
+              <span>Logout</span>
+            </>
+          ) : (
+            <>
+              <LogIn size={20} />
+              <span>Sign In</span>
+            </>
+          )}
 
         </button>
 
